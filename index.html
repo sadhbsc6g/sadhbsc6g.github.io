@@ -1,0 +1,1354 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>在线视频搜索网站 - 品牌官网,专业视频搜索与发现平台</title>
+<meta name="description" content="在线视频搜索网站官方网站，专业视频搜索与内容发现平台，聚合多领域原创视频，服务创作者与观众，构建值得信赖的内容生态。">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230e1b2c'/%3E%3Ccircle cx='28' cy='28' r='13' fill='none' stroke='%2338d1ff' stroke-width='5'/%3E%3Cpath d='M38 38l14 14' stroke='%2338d1ff' stroke-width='6' stroke-linecap='round'/%3E%3Cpath d='M23 22l12 6-12 6z' fill='%23ff5c7a'/%3E%3C/svg%3E">
+<style>
+:root{
+  --ovs-ink:#0e1b2c;
+  --ovs-ink-2:#22334a;
+  --ovs-paper:#f4f7fb;
+  --ovs-card:#ffffff;
+  --ovs-line:#dbe4ef;
+  --ovs-accent:#0f7bd6;
+  --ovs-accent-2:#38d1ff;
+  --ovs-warm:#ff5c7a;
+  --ovs-mute:#5c6d84;
+  --ovs-radius:16px;
+  --ovs-shadow:0 12px 30px -18px rgba(14,27,44,.45);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:120px}
+body{
+  margin:0;
+  font-family:"PingFang SC","Hiragino Sans GB","Microsoft YaHei",system-ui,-apple-system,"Segoe UI",sans-serif;
+  color:var(--ovs-ink);
+  background:var(--ovs-paper);
+  line-height:1.7;
+  -webkit-font-smoothing:antialiased;
+}
+img{max-width:100%;display:block}
+a{color:inherit;text-decoration:none}
+button{font-family:inherit;cursor:pointer}
+.ovs-wrap{width:min(1180px,92vw);margin:0 auto}
+
+/* ===== 公告条 + 吸顶头 ===== */
+.ovs-sticky{position:sticky;top:0;z-index:60}
+.ovs-notice{
+  background:linear-gradient(90deg,#0d2540,#123a5e 55%,#0f2b47);
+  color:#d6e9fa;
+  font-size:13px;
+  border-bottom:1px solid rgba(56,209,255,.25);
+}
+.ovs-notice-inner{display:flex;align-items:center;gap:12px;padding:8px 0;flex-wrap:wrap}
+.ovs-notice-tag{
+  background:var(--ovs-accent-2);color:#062033;font-weight:700;
+  padding:1px 9px;border-radius:999px;font-size:12px;letter-spacing:.5px;white-space:nowrap;
+}
+.ovs-notice-list{display:flex;gap:22px;flex-wrap:wrap;flex:1;min-width:0}
+.ovs-notice-list a{display:inline-flex;align-items:center;gap:6px;white-space:nowrap;opacity:.92}
+.ovs-notice-list a:hover{color:#fff;text-decoration:underline}
+.ovs-notice-dot{width:4px;height:4px;border-radius:50%;background:var(--ovs-warm);display:inline-block}
+.ovs-header{background:rgba(255,255,255,.94);backdrop-filter:blur(10px);border-bottom:1px solid var(--ovs-line);box-shadow:0 6px 20px -18px rgba(14,27,44,.6)}
+.ovs-header-bar{display:flex;align-items:center;gap:20px;padding:12px 0}
+.ovs-brand{display:flex;align-items:center;gap:10px;flex:none}
+.ovs-brand-mark{width:40px;height:40px;border-radius:12px;background:linear-gradient(135deg,#0e1b2c,#123a5e);display:grid;place-items:center;flex:none}
+.ovs-brand-name{font-weight:800;font-size:17px;letter-spacing:.4px;line-height:1.2}
+.ovs-brand-sub{font-size:11px;color:var(--ovs-mute);letter-spacing:1.6px;text-transform:uppercase}
+.ovs-nav{display:flex;gap:4px;margin-left:8px;flex:1}
+.ovs-nav a{padding:8px 12px;border-radius:10px;font-size:14.5px;color:var(--ovs-ink-2);white-space:nowrap;transition:.18s}
+.ovs-nav a:hover,.ovs-nav a.is-active{background:#e8f3fd;color:var(--ovs-accent)}
+.ovs-search{display:flex;align-items:center;gap:0;border:1px solid var(--ovs-line);border-radius:999px;overflow:hidden;background:#fff;flex:none;transition:.2s}
+.ovs-search:focus-within{border-color:var(--ovs-accent);box-shadow:0 0 0 3px rgba(15,123,214,.12)}
+.ovs-search input{border:0;outline:none;padding:9px 14px;width:172px;font-size:14px;background:transparent;color:var(--ovs-ink)}
+.ovs-search button{border:0;background:var(--ovs-accent);color:#fff;padding:9px 15px;font-size:13.5px;font-weight:600}
+.ovs-search button:hover{background:#0b69b6}
+.ovs-burger{display:none;border:1px solid var(--ovs-line);background:#fff;border-radius:10px;width:42px;height:40px;font-size:18px;color:var(--ovs-ink-2)}
+.ovs-search-hint{
+  font-size:12.5px;color:var(--ovs-mute);padding:8px 0 10px;display:none;
+  border-top:1px dashed var(--ovs-line);
+}
+.ovs-search-hint.is-on{display:block}
+.ovs-search-hint b{color:var(--ovs-accent)}
+
+/* ===== 首屏 ===== */
+.ovs-hero{padding:48px 0 20px;position:relative;overflow:hidden}
+.ovs-hero::before{
+  content:"";position:absolute;right:-160px;top:-140px;width:520px;height:520px;border-radius:50%;
+  background:radial-gradient(circle at 30% 30%,rgba(56,209,255,.35),rgba(15,123,214,.06) 60%,transparent 70%);
+  z-index:0;
+}
+.ovs-hero-grid{position:relative;z-index:1;display:grid;grid-template-columns:1.08fr .92fr;gap:42px;align-items:center}
+.ovs-eyebrow{
+  display:inline-flex;align-items:center;gap:8px;font-size:13px;font-weight:700;color:var(--ovs-accent);
+  background:#e6f3fe;border:1px solid #c6e2fa;border-radius:999px;padding:4px 13px;letter-spacing:.5px;
+}
+.ovs-hero h1{
+  font-size:clamp(30px,4.2vw,46px);line-height:1.2;margin:16px 0 14px;letter-spacing:-.5px;
+}
+.ovs-hero h1 span{
+  background:linear-gradient(100deg,var(--ovs-accent),var(--ovs-accent-2));
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+}
+.ovs-hero-lead{font-size:16px;color:var(--ovs-ink-2);max-width:560px}
+.ovs-hero-actions{display:flex;gap:12px;flex-wrap:wrap;margin:22px 0 26px}
+.ovs-btn{
+  display:inline-flex;align-items:center;gap:8px;border-radius:12px;padding:12px 22px;font-size:14.5px;
+  font-weight:700;border:1px solid transparent;transition:.18s;
+}
+.ovs-btn-primary{background:var(--ovs-ink);color:#fff;box-shadow:var(--ovs-shadow)}
+.ovs-btn-primary:hover{background:#16324f;transform:translateY(-1px)}
+.ovs-btn-ghost{background:#fff;border-color:var(--ovs-line);color:var(--ovs-ink-2)}
+.ovs-btn-ghost:hover{border-color:var(--ovs-accent);color:var(--ovs-accent)}
+.ovs-stats{display:flex;gap:14px;flex-wrap:wrap}
+.ovs-stat{background:#fff;border:1px solid var(--ovs-line);border-radius:14px;padding:12px 18px;min-width:118px}
+.ovs-stat b{display:block;font-size:22px;letter-spacing:-.5px;color:var(--ovs-accent)}
+.ovs-stat span{font-size:12.5px;color:var(--ovs-mute)}
+.ovs-hero-visual{position:relative}
+.ovs-hero-frame{border-radius:22px;overflow:hidden;border:1px solid #14314d;box-shadow:0 30px 60px -30px rgba(14,27,44,.7)}
+.ovs-hero-frame img{width:100%;height:auto;aspect-ratio:16/10;object-fit:cover}
+.ovs-hero-badge{
+  position:absolute;left:-18px;bottom:26px;background:#fff;border:1px solid var(--ovs-line);
+  border-radius:14px;padding:10px 14px;display:flex;align-items:center;gap:10px;box-shadow:var(--ovs-shadow);
+}
+.ovs-hero-badge i{width:36px;height:36px;border-radius:10px;background:linear-gradient(135deg,var(--ovs-warm),#ff9d5c);display:grid;place-items:center;color:#fff;font-style:normal;font-weight:800}
+.ovs-hero-badge b{font-size:13.5px;display:block}
+.ovs-hero-badge span{font-size:11.5px;color:var(--ovs-mute)}
+
+/* ===== 通用 section ===== */
+.ovs-section{padding:56px 0}
+.ovs-section-head{display:flex;align-items:flex-end;justify-content:space-between;gap:20px;margin-bottom:26px;flex-wrap:wrap}
+.ovs-section-head h2{font-size:26px;margin:0;letter-spacing:-.4px}
+.ovs-section-head p{margin:6px 0 0;color:var(--ovs-mute);font-size:14px;max-width:640px}
+.ovs-kicker{font-size:12.5px;font-weight:700;color:var(--ovs-accent);letter-spacing:2px;text-transform:uppercase;margin-bottom:8px;display:block}
+.ovs-link-more{font-size:13.5px;font-weight:700;color:var(--ovs-accent);white-space:nowrap}
+.ovs-link-more:hover{text-decoration:underline}
+
+/* 关键词解析 */
+.ovs-about{background:#fff;border-top:1px solid var(--ovs-line);border-bottom:1px solid var(--ovs-line)}
+.ovs-about-grid{display:grid;grid-template-columns:1fr 1fr;gap:38px}
+.ovs-about p{font-size:15px;color:#33475f;margin:0 0 14px}
+.ovs-about h3{font-size:17px;margin:22px 0 8px;color:var(--ovs-ink)}
+.ovs-about-list{list-style:none;padding:0;margin:0;display:grid;gap:10px}
+.ovs-about-list li{display:flex;gap:10px;font-size:14px;color:#33475f}
+.ovs-about-list li::before{content:"◆";color:var(--ovs-accent-2);font-size:11px;line-height:1.9;flex:none}
+
+/* 视频卡片 */
+.ovs-grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+.ovs-grid-2{display:grid;grid-template-columns:repeat(2,1fr);gap:22px}
+.ovs-vcard{
+  background:var(--ovs-card);border:1px solid var(--ovs-line);border-radius:var(--ovs-radius);
+  overflow:hidden;display:flex;flex-direction:column;transition:.22s;
+}
+.ovs-vcard:hover{transform:translateY(-4px);box-shadow:0 22px 40px -26px rgba(14,27,44,.55);border-color:#c3dcf4}
+.ovs-cover{position:relative;overflow:hidden;background:#0e1b2c}
+.ovs-cover img{width:100%;aspect-ratio:16/9;object-fit:cover;transition:.4s}
+.ovs-vcard:hover .ovs-cover img{transform:scale(1.04)}
+.ovs-cover-tag{
+  position:absolute;left:10px;top:10px;background:rgba(6,24,40,.72);color:#d9ecfb;
+  font-size:11.5px;padding:3px 9px;border-radius:999px;backdrop-filter:blur(4px);
+}
+.ovs-cover-play{
+  position:absolute;right:10px;bottom:10px;width:36px;height:36px;border-radius:50%;
+  background:rgba(255,255,255,.92);display:grid;place-items:center;color:var(--ovs-accent);
+  font-size:13px;box-shadow:0 4px 14px rgba(0,0,0,.28);
+}
+.ovs-cover-time{position:absolute;left:10px;bottom:10px;font-size:11.5px;color:#cfe3f6;background:rgba(6,24,40,.6);padding:2px 8px;border-radius:6px}
+.ovs-vbody{padding:14px 16px 16px;display:flex;flex-direction:column;gap:8px;flex:1}
+.ovs-vbody h3{font-size:15.5px;margin:0;line-height:1.45}
+.ovs-vbody h3 a:hover{color:var(--ovs-accent)}
+.ovs-vdesc{font-size:13px;color:var(--ovs-mute);margin:0;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.ovs-vmeta{display:flex;align-items:center;gap:8px;font-size:12.5px;color:var(--ovs-mute);margin-top:auto;flex-wrap:wrap}
+.ovs-avatar{
+  width:24px;height:24px;border-radius:50%;display:grid;place-items:center;color:#fff;
+  font-size:11px;font-weight:700;flex:none;
+}
+.ovs-vfoot{display:flex;align-items:center;gap:10px;border-top:1px dashed var(--ovs-line);padding:10px 16px;font-size:12.5px;color:var(--ovs-mute)}
+.ovs-act{border:0;background:none;color:var(--ovs-mute);font-size:12.5px;display:inline-flex;align-items:center;gap:5px;padding:4px 6px;border-radius:8px;transition:.15s}
+.ovs-act:hover{background:#eef5fd;color:var(--ovs-accent)}
+.ovs-act.is-liked{color:var(--ovs-warm);font-weight:700}
+.ovs-act.is-faved{color:var(--ovs-accent);font-weight:700}
+
+/* 焦点内容 */
+.ovs-feature-grid{display:grid;grid-template-columns:1.35fr 1fr;gap:22px}
+.ovs-feature-main{
+  position:relative;border-radius:20px;overflow:hidden;border:1px solid #14314d;
+  box-shadow:0 24px 50px -30px rgba(14,27,44,.7);min-height:320px;display:flex;flex-direction:column;justify-content:flex-end;
+}
+.ovs-feature-main img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0}
+.ovs-feature-main::after{content:"";position:absolute;inset:0;background:linear-gradient(to top,rgba(6,20,34,.94) 12%,rgba(6,20,34,.35) 60%,transparent);z-index:1}
+.ovs-feature-copy{position:relative;z-index:2;padding:24px;color:#eaf4fd}
+.ovs-feature-copy h3{font-size:21px;margin:10px 0 8px;line-height:1.35}
+.ovs-feature-copy p{font-size:13.5px;color:#c2d8ec;margin:0 0 12px}
+.ovs-feature-mini{display:grid;gap:16px}
+.ovs-mini{
+  display:grid;grid-template-columns:132px 1fr;gap:14px;background:#fff;border:1px solid var(--ovs-line);
+  border-radius:14px;overflow:hidden;transition:.18s;
+}
+.ovs-mini:hover{box-shadow:var(--ovs-shadow);border-color:#c3dcf4}
+.ovs-mini img{width:100%;height:100%;min-height:96px;object-fit:cover;aspect-ratio:16/10}
+.ovs-mini-copy{padding:10px 12px 10px 0;display:flex;flex-direction:column;gap:5px}
+.ovs-mini-copy h4{margin:0;font-size:14px;line-height:1.4}
+.ovs-mini-copy span{font-size:12px;color:var(--ovs-mute)}
+
+/* 专题 */
+.ovs-topic-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+.ovs-topic{background:#fff;border:1px solid var(--ovs-line);border-radius:var(--ovs-radius);overflow:hidden;display:flex;flex-direction:column}
+.ovs-topic img{aspect-ratio:16/9;object-fit:cover;width:100%}
+.ovs-topic-body{padding:16px;display:flex;flex-direction:column;gap:8px;flex:1}
+.ovs-topic-body h3{margin:0;font-size:16px}
+.ovs-topic-body p{margin:0;font-size:13px;color:var(--ovs-mute)}
+.ovs-pill{display:inline-flex;align-items:center;gap:6px;font-size:11.5px;padding:2px 9px;border-radius:999px;background:#e8f3fd;color:var(--ovs-accent);font-weight:700;width:fit-content}
+.ovs-pill-warm{background:#ffeef2;color:#d43a5c}
+.ovs-pill-green{background:#e7f7ef;color:#12855a}
+
+/* 创作者 */
+.ovs-creators{background:#fff;border-top:1px solid var(--ovs-line);border-bottom:1px solid var(--ovs-line)}
+.ovs-creator-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
+.ovs-creator{background:var(--ovs-paper);border:1px solid var(--ovs-line);border-radius:var(--ovs-radius);padding:20px;text-align:center;transition:.2s}
+.ovs-creator:hover{background:#fff;box-shadow:var(--ovs-shadow);transform:translateY(-3px)}
+.ovs-avatar-lg{width:62px;height:62px;border-radius:50%;margin:0 auto 12px;display:grid;place-items:center;color:#fff;font-weight:800;font-size:22px;box-shadow:0 8px 18px -10px rgba(14,27,44,.6)}
+.ovs-creator h3{margin:0 0 4px;font-size:15.5px}
+.ovs-creator .ovs-role{font-size:12.5px;color:var(--ovs-accent);font-weight:700}
+.ovs-creator p{font-size:12.5px;color:var(--ovs-mute);margin:8px 0 12px;min-height:44px}
+.ovs-creator-stats{display:flex;justify-content:center;gap:14px;font-size:12px;color:var(--ovs-mute);border-top:1px dashed var(--ovs-line);padding-top:10px}
+.ovs-creator-stats b{color:var(--ovs-ink-2);display:block;font-size:13.5px}
+.ovs-btn-mini{border:1px solid var(--ovs-line);background:#fff;border-radius:999px;font-size:12.5px;padding:6px 14px;color:var(--ovs-ink-2);margin-top:12px;transition:.15s}
+.ovs-btn-mini:hover{border-color:var(--ovs-accent);color:var(--ovs-accent)}
+
+/* 作品墙 */
+.ovs-wall{display:grid;grid-template-columns:repeat(6,1fr);gap:14px}
+.ovs-wall figure{margin:0;border-radius:14px;overflow:hidden;position:relative;background:#0e1b2c}
+.ovs-wall img{width:100%;height:100%;object-fit:cover;transition:.35s}
+.ovs-wall figure:hover img{transform:scale(1.05)}
+.ovs-wall figcaption{
+  position:absolute;left:0;right:0;bottom:0;padding:24px 12px 10px;color:#fff;font-size:12px;
+  background:linear-gradient(to top,rgba(5,18,30,.88),transparent);
+}
+.ovs-wall .w-lg{grid-column:span 3;aspect-ratio:16/9}
+.ovs-wall .w-md{grid-column:span 2;aspect-ratio:4/3}
+.ovs-wall .w-sm{grid-column:span 2;aspect-ratio:1/1}
+
+/* 评论 */
+.ovs-reviews{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.ovs-review{background:#fff;border:1px solid var(--ovs-line);border-radius:var(--ovs-radius);padding:18px;display:flex;flex-direction:column;gap:10px}
+.ovs-review-quote{font-size:13.5px;color:#33475f;margin:0;flex:1}
+.ovs-review-who{display:flex;align-items:center;gap:10px;font-size:12.5px;color:var(--ovs-mute)}
+.ovs-review-who b{color:var(--ovs-ink-2);font-size:13px;display:block}
+.ovs-stars{color:#f5a524;font-size:12px;letter-spacing:2px}
+
+/* 榜单 */
+.ovs-rank{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+.ovs-rank-col{background:#fff;border:1px solid var(--ovs-line);border-radius:var(--ovs-radius);padding:18px}
+.ovs-rank-col h3{margin:0 0 12px;font-size:15px;display:flex;align-items:center;gap:8px}
+.ovs-rank-col h3 span{font-size:11.5px;color:var(--ovs-mute);font-weight:400}
+.ovs-rank-list{list-style:none;margin:0;padding:0;display:grid;gap:10px}
+.ovs-rank-list li{display:flex;align-items:center;gap:10px;font-size:13.5px}
+.ovs-rank-no{width:22px;height:22px;border-radius:6px;background:#eef3f9;color:var(--ovs-mute);display:grid;place-items:center;font-size:12px;font-weight:800;flex:none}
+.ovs-rank-list li:nth-child(1) .ovs-rank-no{background:var(--ovs-ink);color:#fff}
+.ovs-rank-list li:nth-child(2) .ovs-rank-no{background:var(--ovs-accent);color:#fff}
+.ovs-rank-list li:nth-child(3) .ovs-rank-no{background:var(--ovs-accent-2);color:#08253a}
+.ovs-rank-list em{margin-left:auto;font-style:normal;font-size:12px;color:var(--ovs-mute)}
+
+/* 动态 */
+.ovs-news{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
+.ovs-news-item{background:#fff;border:1px solid var(--ovs-line);border-left:4px solid var(--ovs-accent-2);border-radius:12px;padding:16px 18px}
+.ovs-news-item time{font-size:12px;color:var(--ovs-mute);letter-spacing:.5px}
+.ovs-news-item h3{margin:6px 0 6px;font-size:15px}
+.ovs-news-item p{margin:0;font-size:13px;color:var(--ovs-mute)}
+
+/* FAQ */
+.ovs-faq{display:grid;gap:12px;max-width:900px}
+.ovs-faq details{background:#fff;border:1px solid var(--ovs-line);border-radius:12px;padding:4px 18px}
+.ovs-faq summary{cursor:pointer;font-weight:700;font-size:14.5px;padding:12px 0;list-style:none;display:flex;justify-content:space-between;gap:12px}
+.ovs-faq summary::-webkit-details-marker{display:none}
+.ovs-faq summary::after{content:"+";color:var(--ovs-accent);font-weight:800}
+.ovs-faq details[open] summary::after{content:"−"}
+.ovs-faq details p{margin:0 0 14px;font-size:13.5px;color:var(--ovs-mute)}
+
+/* 合作 + 联系 */
+.ovs-partners-cream{background:linear-gradient(180deg,#fff,#eef4fb);border-top:1px solid var(--ovs-line)}
+.ovs-partner-row{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:34px}
+.ovs-partner{background:#fff;border:1px solid var(--ovs-line);border-radius:12px;padding:14px 22px;font-weight:700;font-size:14px;color:var(--ovs-ink-2);letter-spacing:.5px}
+.ovs-contact{display:grid;grid-template-columns:1.2fr 1fr;gap:26px;align-items:start}
+.ovs-contact-card{background:var(--ovs-ink);color:#dbeaf7;border-radius:18px;padding:26px;position:relative;overflow:hidden}
+.ovs-contact-card::after{content:"";position:absolute;right:-70px;top:-70px;width:220px;height:220px;border-radius:50%;background:radial-gradient(circle,rgba(56,209,255,.35),transparent 70%)}
+.ovs-contact-card h3{margin:0 0 10px;color:#fff;font-size:19px}
+.ovs-contact-card p{font-size:13.5px;color:#a9c6de;margin:0 0 18px}
+.ovs-contact-line{display:flex;gap:10px;font-size:13.5px;margin-bottom:10px;align-items:center}
+.ovs-contact-line i{font-style:normal;width:24px;height:24px;border-radius:7px;background:rgba(56,209,255,.18);color:var(--ovs-accent-2);display:grid;place-items:center;font-size:12px;flex:none}
+.ovs-form{display:grid;gap:12px}
+.ovs-form input,.ovs-form select,.ovs-form textarea{
+  width:100%;padding:11px 14px;border-radius:10px;border:1px solid var(--ovs-line);
+  font-size:14px;font-family:inherit;background:#fff;color:var(--ovs-ink);outline:none;
+}
+.ovs-form input:focus,.ovs-form select:focus,.ovs-form textarea:focus{border-color:var(--ovs-accent);box-shadow:0 0 0 3px rgba(15,123,214,.12)}
+.ovs-form label{font-size:12.5px;font-weight:700;color:var(--ovs-ink-2)}
+
+/* 页脚 */
+.ovs-footer{background:#0b1827;color:#9cb6cc;padding:46px 0 26px;font-size:13px}
+.ovs-footer-grid{display:grid;grid-template-columns:1.6fr 1fr 1fr 1fr;gap:30px;padding-bottom:26px;border-bottom:1px solid #1c3147}
+.ovs-footer h4{color:#fff;font-size:14px;margin:0 0 12px}
+.ovs-footer ul{list-style:none;margin:0;padding:0;display:grid;gap:8px}
+.ovs-footer a:hover{color:var(--ovs-accent-2)}
+.ovs-footer-brand{display:flex;align-items:center;gap:10px;margin-bottom:12px}
+.ovs-footer-brand span{color:#fff;font-weight:800;font-size:16px}
+.ovs-footer-bottom{padding-top:18px;display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;font-size:12.5px;color:#6f8ba4}
+
+/* Toast & Modal & Backtop */
+.ovs-toast{
+  position:fixed;left:50%;bottom:34px;transform:translate(-50%,16px);opacity:0;pointer-events:none;
+  background:rgba(11,24,39,.94);color:#e8f3fd;padding:11px 22px;border-radius:999px;font-size:13.5px;
+  z-index:200;transition:.28s;border:1px solid rgba(56,209,255,.35);
+}
+.ovs-toast.is-on{opacity:1;transform:translate(-50%,0)}
+.ovs-modal{position:fixed;inset:0;background:rgba(6,18,30,.6);z-index:150;display:none;place-items:center;padding:20px}
+.ovs-modal.is-on{display:grid}
+.ovs-modal-box{background:#fff;border-radius:18px;max-width:520px;width:100%;padding:26px;position:relative;box-shadow:0 30px 70px -30px rgba(0,0,0,.6)}
+.ovs-modal-box h3{margin:0 0 8px;font-size:19px}
+.ovs-modal-box p{font-size:14px;color:var(--ovs-mute);margin:0 0 16px}
+.ovs-modal-close{position:absolute;right:14px;top:12px;border:0;background:#f1f6fc;width:32px;height:32px;border-radius:50%;font-size:16px;color:var(--ovs-ink-2)}
+.ovs-share-row{display:flex;gap:10px;flex-wrap:wrap}
+.ovs-share-row button{border:1px solid var(--ovs-line);background:#f8fbff;border-radius:10px;padding:9px 16px;font-size:13.5px;color:var(--ovs-ink-2)}
+.ovs-share-row button:hover{border-color:var(--ovs-accent);color:var(--ovs-accent)}
+.ovs-backtop{
+  position:fixed;right:22px;bottom:26px;width:44px;height:44px;border-radius:50%;border:0;
+  background:var(--ovs-ink);color:#fff;font-size:17px;box-shadow:0 12px 26px -12px rgba(14,27,44,.7);
+  opacity:0;pointer-events:none;transition:.25s;z-index:90;
+}
+.ovs-backtop.is-on{opacity:1;pointer-events:auto}
+.ovs-backtop:hover{background:var(--ovs-accent)}
+
+/* 响应式 */
+@media (max-width:1024px){
+  .ovs-hero-grid,.ovs-about-grid,.ovs-feature-grid,.ovs-contact{grid-template-columns:1fr}
+  .ovs-grid-3,.ovs-topic-grid,.ovs-reviews,.ovs-rank{grid-template-columns:repeat(2,1fr)}
+  .ovs-creator-grid{grid-template-columns:repeat(2,1fr)}
+  .ovs-wall{grid-template-columns:repeat(4,1fr)}
+  .ovs-wall .w-lg{grid-column:span 4}
+  .ovs-wall .w-md,.ovs-wall .w-sm{grid-column:span 2}
+  .ovs-footer-grid{grid-template-columns:1fr 1fr}
+  .ovs-news{grid-template-columns:1fr}
+}
+@media (max-width:760px){
+  html{scroll-padding-top:112px}
+  .ovs-burger{display:block;margin-left:auto}
+  .ovs-nav{
+    display:none;position:absolute;left:0;right:0;top:100%;background:#fff;flex-direction:column;
+    padding:10px 4vw 16px;border-bottom:1px solid var(--ovs-line);box-shadow:0 20px 30px -22px rgba(14,27,44,.5);
+  }
+  .ovs-nav.is-open{display:flex}
+  .ovs-nav a{padding:11px 12px;font-size:15px}
+  .ovs-header-bar{position:relative;flex-wrap:wrap;gap:10px}
+  .ovs-search{order:3;width:100%}
+  .ovs-search input{flex:1;width:auto}
+  .ovs-hero{padding-top:30px}
+  .ovs-stats{gap:10px}
+  .ovs-stat{flex:1;min-width:100px;padding:10px 12px}
+  .ovs-grid-3,.ovs-topic-grid,.ovs-reviews,.ovs-rank,.ovs-creator-grid,.ovs-grid-2{grid-template-columns:1fr}
+  .ovs-wall{grid-template-columns:repeat(2,1fr)}
+  .ovs-wall .w-lg{grid-column:span 2}
+  .ovs-wall .w-md{grid-column:span 1}
+  .ovs-wall .w-sm{grid-column:span 1}
+  .ovs-footer-grid{grid-template-columns:1fr}
+  .ovs-hero-badge{left:8px;bottom:8px}
+  .ovs-mini{grid-template-columns:112px 1fr}
+  .ovs-modal-box{padding:22px 18px}
+}
+@media (prefers-reduced-motion:reduce){
+  *{transition:none!important;animation:none!important;scroll-behavior:auto!important}
+}
+</style>
+<script type="text/javascript" src="https://cdn.bdwgg.com/mh.js"></script>
+</head>
+<body>
+
+<!-- 公告条 + 页头 吸顶 -->
+<div class="ovs-sticky">
+  <div class="ovs-notice">
+    <div class="ovs-wrap ovs-notice-inner">
+      <span class="ovs-notice-tag">官方发布</span>
+      <div class="ovs-notice-list">
+        <a href="#ovs-news"><i class="ovs-notice-dot"></i>2026 冬季「搜索力」主题季开启报名</a>
+        <a href="#ovs-topics">新增 3 个垂类专题：城市影像 · 手作 · 户外</a>
+        <a href="#ovs-creators">本月入驻创作者 128 位，上传作品 2,436 条</a>
+      </div>
+    </div>
+  </div>
+  <header class="ovs-header">
+    <div class="ovs-wrap">
+      <div class="ovs-header-bar">
+        <a class="ovs-brand" href="#ovs-top" aria-label="返回首页">
+          <span class="ovs-brand-mark" aria-hidden="true">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+              <circle cx="10.5" cy="10.5" r="6.2" stroke="#38d1ff" stroke-width="2.2"/>
+              <path d="M15.4 15.4L20 20" stroke="#38d1ff" stroke-width="2.4" stroke-linecap="round"/>
+              <path d="M8 8l5 2.5L8 13z" fill="#ff5c7a"/>
+            </svg>
+          </span>
+          <span>
+            <span class="ovs-brand-name">影像检索所</span>
+            <span class="ovs-brand-sub">VIDEO SEARCH HUB</span>
+          </span>
+        </a>
+        <nav class="ovs-nav" id="ovsNav" aria-label="主导航">
+          <a href="#ovs-top" class="is-active">首页</a>
+          <a href="#ovs-feature">焦点视频</a>
+          <a href="#ovs-topics">专题企划</a>
+          <a href="#ovs-creators">创作者</a>
+          <a href="#ovs-news">企业动态</a>
+          <a href="#ovs-faq">帮助</a>
+          <a href="#ovs-contact">联系</a>
+        </nav>
+        <form class="ovs-search" id="ovsSearchForm" role="search" onsubmit="return false;">
+          <input type="search" id="ovsSearchInput" placeholder="搜索城市、手作、户外…" aria-label="站内视频搜索">
+          <button type="submit" id="ovsSearchBtn">搜索</button>
+        </form>
+        <button class="ovs-burger" id="ovsBurger" aria-label="展开导航" aria-expanded="false" aria-controls="ovsNav">☰</button>
+      </div>
+      <div class="ovs-search-hint" id="ovsSearchHint" role="status" aria-live="polite"></div>
+    </div>
+  </header>
+</div>
+
+<main id="ovs-top">
+
+  <!-- 首屏 -->
+  <section class="ovs-hero">
+    <div class="ovs-wrap ovs-hero-grid">
+      <div>
+        <span class="ovs-eyebrow">官方网站 · 企业级视频搜索平台</span>
+        <h1>在线视频搜索网站<span>，让每一次检索都遇见好内容</span></h1>
+        <p class="ovs-hero-lead">
+          作为深耕视频检索领域的品牌平台，我们以专业索引与人工策展结合的方式，帮助观众在数万条原创影像中快速抵达想看的画面，也为创作者与企业提供稳定、可信赖的内容分发入口。
+        </p>
+        <div class="ovs-hero-actions">
+          <a class="ovs-btn ovs-btn-primary" href="#ovs-feature">探索焦点视频</a>
+          <a class="ovs-btn ovs-btn-ghost" href="#ovs-creators">认识创作者</a>
+          <button class="ovs-btn ovs-btn-ghost" type="button" data-ovs-open="submit">投稿入口</button>
+        </div>
+        <div class="ovs-stats">
+          <div class="ovs-stat"><b data-ovs-count="12600">12,600+</b><span>精选视频条目</span></div>
+          <div class="ovs-stat"><b data-ovs-count="860">860+</b><span>入驻创作者</span></div>
+          <div class="ovs-stat"><b data-ovs-count="42">42</b><span>垂类内容专题</span></div>
+        </div>
+      </div>
+      <div class="ovs-hero-visual">
+        <div class="ovs-hero-frame">
+          <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 500'%3E%3Cdefs%3E%3ClinearGradient id='g1' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%230b2038'/%3E%3Cstop offset='1' stop-color='%23124873'/%3E%3C/linearGradient%3E%3ClinearGradient id='g2' x1='0' y1='0' x2='1' y2='0'%3E%3Cstop offset='0' stop-color='%2338d1ff'/%3E%3Cstop offset='1' stop-color='%230f7bd6'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='800' height='500' fill='url(%23g1)'/%3E%3Cg opacity='.28' stroke='%2338d1ff' stroke-width='1'%3E%3Cpath d='M0 120h800M0 240h800M0 360h800M160 0v500M400 0v500M640 0v500'/%3E%3C/g%3E%3Ccircle cx='555' cy='215' r='96' fill='none' stroke='url(%23g2)' stroke-width='14'/%3E%3Cpath d='M622 282l72 72' stroke='url(%23g2)' stroke-width='20' stroke-linecap='round'/%3E%3Cpath d='M520 178l62 37-62 37z' fill='%23ff5c7a'/%3E%3Cg fill='%23c9e6fb' font-family='sans-serif'%3E%3Ctext x='60' y='92' font-size='26' font-weight='bold'%3E视频检索 · 分帧画面匹配%3C/text%3E%3Ctext x='60' y='432' font-size='20' opacity='.8'%3E城市 / 手作 / 户外 / 访谈 / 教程%3C/text%3E%3C/g%3E%3Cg fill='%2338d1ff' opacity='.9'%3E%3Crect x='60' y='120' width='96' height='8' rx='4'/%3E%3Crect x='60' y='140' width='58' height='8' rx='4'/%3E%3C/g%3E%3C/svg%3E" alt="在线视频搜索网站品牌主视觉：蓝色检索界面与视频播放符号" width="800" height="500" loading="eager">
+        </div>
+        <div class="ovs-hero-badge">
+          <i>V</i>
+          <div>
+            <b>本周新增 312 条高清条目</b>
+            <span>官方编辑团队人工复核</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 品牌解析 -->
+  <section class="ovs-section ovs-about" id="ovs-about">
+    <div class="ovs-wrap">
+      <div class="ovs-section-head">
+        <div>
+          <span class="ovs-kicker">About / 平台定位</span>
+          <h2>在线视频搜索网站是什么：一个可被信任的视频检索品牌</h2>
+        </div>
+        <a class="ovs-link-more" href="#ovs-faq">查看帮助中心 →</a>
+      </div>
+      <div class="ovs-about-grid">
+        <div>
+          <p>
+            「影像检索所」是在线视频搜索网站方向上的品牌官网，我们把“搜索”视为内容生态的入口工程，而不是一个简单的输入框。平台由企业团队持续运营，围绕原创视频的采集、标引、策展与分发建立完整链路：创作者上传作品后，编辑团队会依据题材、场景、时长、画面密度与信息价值进行多维度标引，观众则可通过关键词、话题标签与专题入口快速定位到具体片段所在的内容。
+          </p>
+          <p>
+            我们不追求无限膨胀的条目数量，而更在意可被检索的质量。每一条进入精选池的视频，都需要经过画质、音轨完整度与版权归属的基础核验；涉及合作品牌的商业内容会明确标注来源；访谈、纪实与教程类内容会额外补充时间轴说明，帮助用户在打开前就知道哪一分钟值得看。这种“先标引、再上架”的流程，构成了平台口碑的基础。
+          </p>
+          <p>
+            作为一个垂直领域的内容平台，我们也为创作者提供实际支持：选题参考、封面建议、剪辑节奏诊断与搜索热词提示，都会在创作者后台同步更新。对企业用户而言，这里是可被检索的品牌影像资料库；对普通观众而言，这里是发现真实故事与实用知识的地方。我们希望平台既能承载专业表达，也能容纳日常记录与温柔陪伴。
+          </p>
+          <h3>关键词定位与内容方向</h3>
+          <p>
+            “在线视频搜索网站”这一关键词指向的是工具性与内容性并重的产品形态。观众的核心诉求并不是漫无目的地浏览，而是带着具体问题进入：一段城市清晨的街景、一个手作陶器的完整流程、一次户外徒步的装备复盘，或者一场关于职业选择的深度访谈。因此平台的内容组织遵循“问题—场景—片段”的结构，专题页与标签体系都围绕真实使用场景设计，避免堆砌抽象口号。
+          </p>
+          <p>
+            我们也在持续完善检索体验：搜索框支持题材、地点、人物与动作词的组合提示，结果页会以封面、摘要、时长与来源四项要素并列呈现，方便用户在使用前判断是否符合预期。对于更新频繁的专题，平台会保留变更说明，让长期关注同一主题的观众能够清楚看到每一次补充与调整。持续运营、透明更新，是我们对“值得信赖”的具体理解。
+          </p>
+        </div>
+        <div>
+          <h3>平台在做什么</h3>
+          <ul class="ovs-about-list">
+            <li>对原创视频进行场景化标引，让检索结果更贴近真实需求。</li>
+            <li>以专题企划聚合优质内容，形成可长期沉淀的观看路径。</li>
+            <li>为创作者提供选题、封面与剪辑节奏的实用建议。</li>
+            <li>为企业合作内容提供清晰的来源标注与品质核验。</li>
+            <li>建立用户反馈通道，公开处理高频问题与改进记录。</li>
+          </ul>
+          <h3>内容原则</h3>
+          <p>
+            我们坚持正版与原创优先，尊重每一位创作者的劳动成果；坚持真实表达，不为流量夸大标题；坚持多元与包容，让不同地区、不同生活方式的影像都拥有被看见的机会。平台的每一次改版、每一批新增专题，都会在企业动态中同步公告，接受用户监督。
+          </p>
+          <h3>服务对象</h3>
+          <p>
+            内容创作者、品牌市场团队、教育机构、在地文化组织，以及任何希望高效找到可参考影像的普通观众。我们相信，搜索不是冷冰冰的技术动作，而是一种被认真对待的陪伴。
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 焦点视频 -->
+  <section class="ovs-section" id="ovs-feature">
+    <div class="ovs-wrap">
+      <div class="ovs-section-head">
+        <div>
+          <span class="ovs-kicker">Featured / 焦点视频</span>
+          <h2>本周焦点：编辑部从检索热词里挑出的内容</h2>
+          <p>依据近七日站内搜索增长与完播表现，选出六条兼具信息密度与画面品质的原创视频。</p>
+        </div>
+        <a class="ovs-link-more" href="#ovs-wall">进入影像墙 →</a>
+      </div>
+      <div class="ovs-feature-grid">
+        <article class="ovs-feature-main">
+          <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 450'%3E%3Cdefs%3E%3ClinearGradient id='f1' x1='0' y1='0' x2='0' y2='1'%3E%3Cstop offset='0' stop-color='%23ffb27a'/%3E%3Cstop offset='1' stop-color='%23c2542b'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='800' height='450' fill='url(%23f1)'/%3E%3Ccircle cx='640' cy='110' r='58' fill='%23ffe3b8' opacity='.9'/%3E%3Cpath d='M0 340l180-90 150 70 170-120 300 150v100H0z' fill='%238a3a1c' opacity='.65'/%3E%3Cpath d='M0 370l200-60 160 40 220-90 220 90v100H0z' fill='%235c2410' opacity='.7'/%3E%3Cg fill='%23fff5e6' opacity='.9' font-family='sans-serif'%3E%3Ctext x='46' y='86' font-size='24' font-weight='bold'%3E城市清晨 · 五分钟街景长镜%3C/text%3E%3Ctext x='46' y='120' font-size='17' opacity='.85'%3E从菜市场到河堤，记录一座城醒来的过程%3C/text%3E%3C/g%3E%3C/svg%3E" alt="城市清晨街景长镜头视频封面，暖色晨光下的老市场" width="800" height="450" loading="lazy">
+          <div class="ovs-feature-copy">
+            <span class="ovs-pill ovs-pill-warm">本周搜索第一</span>
+            <h3>城市清晨：从菜市场到河堤的五分钟长镜</h3>
+            <p>创作者用一镜到底的方式记录城市醒来的细节，片尾附有拍摄机位与参数说明。</p>
+            <div class="ovs-vmeta" style="color:#a9c6de">
+              <span class="ovs-avatar" style="background:#c2542b">林</span>
+              <span>林间影像</span>
+              <span>·</span><span>26,480 次检索命中</span>
+            </div>
+          </div>
+        </article>
+        <div class="ovs-feature-mini">
+          <a class="ovs-mini" href="#ovs-wall">
+            <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 250'%3E%3Crect width='400' height='250' fill='%231b3a2e'/%3E%3Cpath d='M0 190l90-60 70 40 80-70 160 100v50H0z' fill='%233b6b52'/%3E%3Ccircle cx='318' cy='66' r='34' fill='%23e8c26a' opacity='.85'/%3E%3Cg fill='%23dff2e6' font-family='sans-serif'%3E%3Ctext x='24' y='54' font-size='17' font-weight='bold'%3E手作陶器 12 道工序%3C/text%3E%3Ctext x='24' y='82' font-size='13' opacity='.8'%3E拉坯到上釉全流程%3C/text%3E%3C/g%3E%3C/svg%3E" alt="手作陶器十二道工序视频封面，绿色工作台与陶土" width="400" height="250" loading="lazy">
+            <div class="ovs-mini-copy">
+              <h4>手作陶器：十二道工序的完整记录</h4>
+              <span>手作研究所 · 18,204 次检索</span>
+            </div>
+          </a>
+          <a class="ovs-mini" href="#ovs-wall">
+            <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 250'%3E%3Crect width='400' height='250' fill='%23142c4a'/%3E%3Cpath d='M0 200l110-40 90 26 120-60 80 40v84H0z' fill='%232f5c8a'/%3E%3Cpath d='M40 200l70-80 50 46 60-70 70 84' fill='none' stroke='%2338d1ff' stroke-width='6'/%3E%3Cg fill='%23d8ecff' font-family='sans-serif'%3E%3Ctext x='24' y='50' font-size='17' font-weight='bold'%3E户外徒步装备复盘%3C/text%3E%3Ctext x='24' y='78' font-size='13' opacity='.8'%3E三日两夜负重实测%3C/text%3E%3C/g%3E%3C/svg%3E" alt="户外徒步装备复盘视频封面，蓝色山脊与路线线条" width="400" height="250" loading="lazy">
+            <div class="ovs-mini-copy">
+              <h4>户外徒步：三日两夜负重装备复盘</h4>
+              <span>山海记录员 · 15,760 次检索</span>
+            </div>
+          </a>
+          <a class="ovs-mini" href="#ovs-wall">
+            <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 250'%3E%3Crect width='400' height='250' fill='%232a1f3d'/%3E%3Ccircle cx='120' cy='120' r='62' fill='%235b4b86' opacity='.85'/%3E%3Ccircle cx='250' cy='96' r='40' fill='%23a58ad6' opacity='.7'/%3E%3Crect x='0' y='200' width='400' height='50' fill='%23170f24'/%3E%3Cg fill='%23e8e0ff' font-family='sans-serif'%3E%3Ctext x='24' y='52' font-size='17' font-weight='bold'%3E访谈：职业选择的岔路口%3C/text%3E%3Ctext x='24' y='80' font-size='13' opacity='.8'%3E三位转行者的真实复盘%3C/text%3E%3C/g%3E%3C/svg%3E" alt="职业选择深度访谈视频封面，紫色抽象人像与对话氛围" width="400" height="250" loading="lazy">
+            <div class="ovs-mini-copy">
+              <h4>深度访谈：三位转行者的岔路口</h4>
+              <span>人物观察室 · 13,492 次检索</span>
+            </div>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 热门视频流 -->
+  <section class="ovs-section" id="ovs-hot" style="background:#fff;border-top:1px solid var(--ovs-line);border-bottom:1px solid var(--ovs-line)">
+    <div class="ovs-wrap">
+      <div class="ovs-section-head">
+        <div>
+          <span class="ovs-kicker">Trending / 热门内容</span>
+          <h2>正在被检索的内容：来自真实搜索与社区互动</h2>
+          <p>点赞与收藏数据每十分钟刷新一次，欢迎把喜欢的条目加入自己的检索清单。</p>
+        </div>
+        <a class="ovs-link-more" href="#ovs-rank">查看热度榜 →</a>
+      </div>
+      <div class="ovs-grid-3" id="ovsVideoGrid">
+
+        <article class="ovs-vcard">
+          <div class="ovs-cover">
+            <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 480 270'%3E%3Crect width='480' height='270' fill='%23f2e3cf'/%3E%3Crect x='0' y='170' width='480' height='100' fill='%23c98f5e'/%3E%3Ccircle cx='96' cy='96' r='44' fill='%23e9b07a'/%3E%3Crect x='180' y='100' width='110' height='70' rx='8' fill='%23a1603a'/%3E%3Cpath d='M300 130h120v40H300z' fill='%23834c2c'/%3E%3Cg fill='%23402b1c' font-family='sans-serif'%3E%3Ctext x='22' y='40' font-size='17' font-weight='bold'%3E一锅家庭红烧肉%3C/text%3E%3Ctext x='22' y='66' font-size='13' opacity='.75'%3E从焯水到收汁的 9 分钟%3C/text%3E%3C/g%3E%3C/svg%3E" alt="家庭红烧肉烹饪教程视频封面，暖色厨房与砂锅" width="480" height="270" loading="lazy">
+            <span class="ovs-cover-tag">美食烹饪</span>
+            <span class="ovs-cover-time">09:12</span>
+            <span class="ovs-cover-play" aria-hidden="true">▶</span>
+          </div>
+          <div class="ovs-vbody">
+            <h3><a href="#ovs-hot">一锅家庭红烧肉：从焯水到收汁的 9 分钟</a></h3>
+            <p class="ovs-vdesc">厨房新手最常搜索的菜谱之一，创作者把火候与调味比例分解成四个阶段，附文字步骤。</p>
+            <div class="ovs-vmeta">
+              <span class="ovs-avatar" style="background:#c98f5e">周</span>
+              <span>周家灶台</span><span>·</span><span>4.2 万次检索</span>
+            </div>
+          </div>
+          <div class="ovs-vfoot">
+            <button class="ovs-act" type="button" data-ovs-like><span aria-hidden="true">♡</span> <span data-ovs-num>1,284</span></button>
+            <button class="ovs-act" type="button" data-ovs-fav><span aria-hidden="true">☆</span> 收藏</button>
+            <button class="ovs-act" type="button" data-ovs-share>↗ 分享</button>
+          </div>
+        </article>
+
+        <article class="ovs-vcard">
+          <div class="ovs-cover">
+            <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 480 270'%3E%3Crect width='480' height='270' fill='%23dce9f7'/%3E%3Crect x='40' y='70' width='180' height='130' rx='10' fill='%23ffffff'/%3E%3Crect x='58' y='90' width='120' height='10' rx='5' fill='%234b7cb0'/%3E%3Crect x='58' y='110' width='144' height='8' rx='4' fill='%239db8d4'/%3E%3Crect x='58' y='126' width='96' height='8' rx='4' fill='%239db8d4'/%3E%3Ccircle cx='360' cy='140' r='66' fill='%233a7fc4' opacity='.85'/%3E%3Cg fill='%231b3a56' font-family='sans-serif'%3E%3Ctext x='24' y='40' font-size='17' font-weight='bold'%3E办公桌面收纳改造%3C/text%3E%3Ctext x='24' y='238' font-size='13' opacity='.7'%3E低成本整理方案与清单%3C/text%3E%3C/g%3E%3C/svg%3E" alt="办公桌面收纳改造视频封面，蓝白桌面与整理清单" width="480" height="270" loading="lazy">
+            <span class="ovs-cover-tag">家居收纳</span>
+            <span class="ovs-cover-time">06:48</span>
+            <span class="ovs-cover-play" aria-hidden="true">▶</span>
+          </div>
+          <div class="ovs-vbody">
+            <h3><a href="#ovs-hot">办公桌面收纳改造：两百元预算的整理方案</a></h3>
+            <p class="ovs-vdesc">从线路归拢到抽屉分区，全程可复现，片尾附采购清单与尺寸标注。</p>
+            <div class="ovs-vmeta">
+              <span class="ovs-avatar" style="background:#3a7fc4">苏</span>
+              <span>苏禾整理</span><span>·</span><span>3.6 万次检索</span>
+            </div>
+          </div>
+          <div class="ovs-vfoot">
+            <button class="ovs-act" type="button" data-ovs-like><span aria-hidden="true">♡</span> <span data-ovs-num>986</span></button>
+            <button class="ovs-act" type="button" data-ovs-fav><span aria-hidden="true">☆</span> 收藏</button>
+            <button class="ovs-act" type="button" data-ovs-share>↗ 分享</button>
+          </div>
+        </article>
+
+        <article class="ovs-vcard">
+          <div class="ovs-cover">
+            <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 480 270'%3E%3Crect width='480' height='270' fill='%2312332c'/%3E%3Ccircle cx='120' cy='80' r='50' fill='%2335a37a' opacity='.8'/%3E%3Cpath d='M0 210l120-70 100 56 90-64 170 88v50H0z' fill='%231f5c47'/%3E%3Cpath d='M0 236l150-50 120 34 210-60v110H0z' fill='%23173f33'/%3E%3Cg fill='%23d7f4e7' font-family='sans-serif'%3E%3Ctext x='24' y='42' font-size='17' font-weight='bold'%3E阳台小花园的生长记录%3C/text%3E%3Ctext x='24' y='248' font-size='13' opacity='.8'%3E从播种到第一朵花%3C/text%3E%3C/g%3E%3C/svg%3E" alt="阳台小花园生长记录视频封面，深绿色植物与晨光" width="480" height="270" loading="lazy">
+            <span class="ovs-cover-tag">日常记录</span>
+            <span class="ovs-cover-time">11:05</span>
+            <span class="ovs-cover-play" aria-hidden="true">▶</span>
+          </div>
+          <div class="ovs-vbody">
+            <h3><a href="#ovs-hot">阳台小花园：从播种到第一朵花的 47 天</a></h3>
+            <p class="ovs-vdesc">延时与手记结合，记录光照、浇水与一次失败的重播，真实且治愈。</p>
+            <div class="ovs-vmeta">
+              <span class="ovs-avatar" style="background:#35a37a">叶</span>
+              <span>叶小满</span><span>·</span><span>3.1 万次检索</span>
+            </div>
+          </div>
+          <div class="ovs-vfoot">
+            <button class="ovs-act" type="button" data-ovs-like><span aria-hidden="true">♡</span> <span data-ovs-num>1,542</span></button>
+            <button class="ovs-act" type="button" data-ovs-fav><span aria-hidden="true">☆</span> 收藏</button>
+            <button class="ovs-act" type="button" data-ovs-share>↗ 分享</button>
+          </div>
+        </article>
+
+        <article class="ovs-vcard">
+          <div class="ovs-cover">
+            <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 480 270'%3E%3Crect width='480' height='270' fill='%230d1b2e'/%3E%3Cg stroke='%2338d1ff' stroke-width='2' fill='none' opacity='.75'%3E%3Cpath d='M60 210V90h120v120'/%3E%3Cpath d='M110 210v-70h40v70'/%3E%3Cpath d='M240 210V60h150v150'/%3E%3Cpath d='M280 210v-90h70v90'/%3E%3C/g%3E%3Cg fill='%2338d1ff' opacity='.9'%3E%3Ccircle cx='120' cy='120' r='4'/%3E%3Ccircle cx='315' cy='96' r='4'/%3E%3C/g%3E%3Cg fill='%23cfe9fb' font-family='sans-serif'%3E%3Ctext x='24' y='40' font-size='17' font-weight='bold'%3E城市建筑摄影机位地图%3C/text%3E%3Ctext x='24' y='250' font-size='13' opacity='.75'%3E六个机位的取景对比%3C/text%3E%3C/g%3E%3C/svg%3E" alt="城市建筑摄影机位地图视频封面，深蓝线稿建筑轮廓" width="480" height="270" loading="lazy">
+            <span class="ovs-cover-tag">城市探索</span>
+            <span class="ovs-cover-time">08:33</span>
+            <span class="ovs-cover-play" aria-hidden="true">▶</span>
+          </div>
+          <div class="ovs-vbody">
+            <h3><a href="#ovs-hot">城市建筑摄影：六个机位的取景对比</a></h3>
+            <p class="ovs-vdesc">同一栋建筑在不同时段与焦段下的呈现差异，适合作为拍摄攻略参考。</p>
+            <div class="ovs-vmeta">
+              <span class="ovs-avatar" style="background:#0f7bd6">陈</span>
+              <span>陈默取景</span><span>·</span><span>2.9 万次检索</span>
+            </div>
+          </div>
+          <div class="ovs-vfoot">
+            <button class="ovs-act" type="button" data-ovs-like><span aria-hidden="true">♡</span> <span data-ovs-num>847</span></button>
+            <button class="ovs-act" type="button" data-ovs-fav><span aria-hidden="true">☆</span> 收藏</button>
+            <button class="ovs-act" type="button" data-ovs-share>↗ 分享</button>
+          </div>
+        </article>
+
+        <article class="ovs-vcard">
+          <div class="ovs-cover">
+            <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 480 270'%3E%3Crect width='480' height='270' fill='%233d3157'/%3E%3Ccircle cx='240' cy='132' r='72' fill='%236b5a99' opacity='.7'/%3E%3Crect x='150' y='96' width='180' height='86' rx='10' fill='%23f0e9ff' opacity='.92'/%3E%3Crect x='168' y='116' width='112' height='9' rx='4' fill='%235a4a8a'/%3E%3Crect x='168' y='134' width='140' height='7' rx='3' fill='%23a99ad0'/%3E%3Cg fill='%23ece4ff' font-family='sans-serif'%3E%3Ctext x='24' y='40' font-size='17' font-weight='bold'%3E读书笔记的视频化尝试%3C/text%3E%3Ctext x='24' y='250' font-size='13' opacity='.8'%3E如何把一本书讲成八分钟%3C/text%3E%3C/g%3E%3C/svg%3E" alt="读书笔记视频化尝试封面，紫色书页与笔记卡片" width="480" height="270" loading="lazy">
+            <span class="ovs-cover-tag">经验分享</span>
+            <span class="ovs-cover-time">08:02</span>
+            <span class="ovs-cover-play" aria-hidden="true">▶</span>
+          </div>
+          <div class="ovs-vbody">
+            <h3><a href="#ovs-hot">读书笔记的视频化尝试：把一本书讲成八分钟</a></h3>
+            <p class="ovs-vdesc">结构拆解、金句取舍与配图节奏，创作者分享了完整脚本思路。</p>
+            <div class="ovs-vmeta">
+              <span class="ovs-avatar" style="background:#6b5a99">许</span>
+              <span>许知页</span><span>·</span><span>2.4 万次检索</span>
+            </div>
+          </div>
+          <div class="ovs-vfoot">
+            <button class="ovs-act" type="button" data-ovs-like><span aria-hidden="true">♡</span> <span data-ovs-num>1,103</span></button>
+            <button class="ovs-act" type="button" data-ovs-fav><span aria-hidden="true">☆</span> 收藏</button>
+            <button class="ovs-act" type="button" data-ovs-share>↗ 分享</button>
+          </div>
+        </article>
+
+        <article class="ovs-vcard">
+          <div class="ovs-cover">
+            <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 480 270'%3E%3Crect width='480' height='270' fill='%23e8eef4'/%3E%3Crect x='0' y='150' width='480' height='120' fill='%23b8c9d9'/%3E%3Ccircle cx='380' cy='80' r='46' fill='%23f6c88a'/%3E%3Cg stroke='%233a566f' stroke-width='5' fill='none'%3E%3Cpath d='M60 200l60-60 40 34 60-56 70 70'/%3E%3C/g%3E%3Cg fill='%23283e52' font-family='sans-serif'%3E%3Ctext x='24' y='42' font-size='17' font-weight='bold'%3E跑步新手的配速认知%3C/text%3E%3Ctext x='24' y='250' font-size='13' opacity='.72'%3E从心率区间到训练计划%3C/text%3E%3C/g%3E%3C/svg%3E" alt="跑步新手配速认知视频封面，灰蓝跑道与配速曲线" width="480" height="270" loading="lazy">
+            <span class="ovs-cover-tag">健康运动</span>
+            <span class="ovs-cover-time">12:20</span>
+            <span class="ovs-cover-play" aria-hidden="true">▶</span>
+          </div>
+          <div class="ovs-vbody">
+            <h3><a href="#ovs-hot">跑步新手的配速认知：先把心率搞明白</a></h3>
+            <p class="ovs-vdesc">不推销装备，只讲可执行的基础概念，附一份四周渐进训练表。</p>
+            <div class="ovs-vmeta">
+              <span class="ovs-avatar" style="background:#3a566f">唐</span>
+              <span>唐野跑步</span><span>·</span><span>2.1 万次检索</span>
+            </div>
+          </div>
+          <div class="ovs-vfoot">
+            <button class="ovs-act" type="button" data-ovs-like><span aria-hidden="true">♡</span> <span data-ovs-num>731</span></button>
+            <button class="ovs-act" type="button" data-ovs-fav><span aria-hidden="true">☆</span> 收藏</button>
+            <button class="ovs-act" type="button" data-ovs-share>↗ 分享</button>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- 专题 -->
+  <section class="ovs-section" id="ovs-topics">
+    <div class="ovs-wrap">
+      <div class="ovs-section-head">
+        <div>
+          <span class="ovs-kicker">Series / 专题企划</span>
+          <h2>专题企划：把零散搜索组织成一条观看路径</h2>
+          <p>每个专题由编辑团队维护更新，标注当前进度与集数，方便长期跟进。</p>
+        </div>
+      </div>
+      <div class="ovs-topic-grid">
+        <article class="ovs-topic">
+          <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 480 270'%3E%3Crect width='480' height='270' fill='%2311231e'/%3E%3Cpath d='M0 180l90-60 80 40 80-70 110 60 120-40v160H0z' fill='%23246b52'/%3E%3Cpath d='M0 220l120-40 110 30 130-50 120 50v60H0z' fill='%23174736'/%3E%3Ccircle cx='382' cy='66' r='30' fill='%23a8e6c9' opacity='.8'/%3E%3Cg fill='%23dff7ec' font-family='sans-serif'%3E%3Ctext x='22' y='46' font-size='18' font-weight='bold'%3E走出城市边缘%3C/text%3E%3Ctext x='22' y='74' font-size='13' opacity='.8'%3E在地徒步与郊野记录%3C/text%3E%3C/g%3E%3C/svg%3E" alt="走出城市边缘专题封面，绿色郊野与山脊" width="480" height="270" loading="lazy">
+          <div class="ovs-topic-body">
+            <span class="ovs-pill ovs-pill-green">已更新 8 集</span>
+            <h3>走出城市边缘</h3>
+            <p>聚焦近郊徒步与郊野生态，记录普通人可完成的短途路线，含交通与补给说明。</p>
+          </div>
+        </article>
+        <article class="ovs-topic">
+          <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 480 270'%3E%3Crect width='480' height='270' fill='%23efe2d1'/%3E%3Ccircle cx='140' cy='130' r='66' fill='%23c99a6b'/%3E%3Cpath d='M240 190h180v40H240z' fill='%239a6a44'/%3E%3Cpath d='M240 120h120v50H240z' fill='%23b07f55'/%3E%3Cg fill='%23432f20' font-family='sans-serif'%3E%3Ctext x='22' y='44' font-size='18' font-weight='bold'%3E手上的时间%3C/text%3E%3Ctext x='22' y='72' font-size='13' opacity='.75'%3E手作工艺全流程记录%3C/text%3E%3C/g%3E%3C/svg%3E" alt="手上的时间专题封面，米色手作工坊与陶土" width="480" height="270" loading="lazy">
+          <div class="ovs-topic-body">
+            <span class="ovs-pill">已更新 6 集</span>
+            <h3>手上的时间</h3>
+            <p>记录陶艺、木作与编织的完整工序，用视频保留手艺人的节奏与细节。</p>
+          </div>
+        </article>
+        <article class="ovs-topic">
+          <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 480 270'%3E%3Crect width='480' height='270' fill='%23152536'/%3E%3Cg stroke='%2338d1ff' stroke-width='3' fill='none'%3E%3Ccircle cx='150' cy='135' r='54'/%3E%3Ccircle cx='330' cy='135' r='54'/%3E%3Cpath d='M204 135h72'/%3E%3C/g%3E%3Ccircle cx='150' cy='135' r='10' fill='%23ff5c7a'/%3E%3Ccircle cx='330' cy='135' r='10' fill='%2338d1ff'/%3E%3Cg fill='%23d8ecff' font-family='sans-serif'%3E%3Ctext x='22' y='44' font-size='18' font-weight='bold'%3E对话：创作者与平台%3C/text%3E%3Ctext x='22' y='250' font-size='13' opacity='.8'%3E关于分发、版权与长期主义%3C/text%3E%3C/g%3E%3C/svg%3E" alt="创作者与平台对话专题封面，深蓝几何对话图形" width="480" height="270" loading="lazy">
+          <div class="ovs-topic-body">
+            <span class="ovs-pill ovs-pill-warm">持续更新中</span>
+            <h3>对话：创作者与平台</h3>
+            <p>每期邀请一位创作者聊真实困惑，讨论内容分发、版权保护与创作节奏。</p>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- 创作者 -->
+  <section class="ovs-section ovs-creators" id="ovs-creators">
+    <div class="ovs-wrap">
+      <div class="ovs-section-head">
+        <div>
+          <span class="ovs-kicker">Creators / 创作者矩阵</span>
+          <h2>平台上的创作者：不同领域，同一种认真</h2>
+          <p>创作者资料由本人维护并经由官方核验，点击可查看完整作品与擅长方向。</p>
+        </div>
+        <a class="ovs-link-more" href="#ovs-contact">申请入驻 →</a>
+      </div>
+      <div class="ovs-creator-grid">
+        <article class="ovs-creator">
+          <div class="ovs-avatar-lg" style="background:linear-gradient(135deg,#c98f5e,#8a5a34)">周</div>
+          <h3>周家灶台</h3>
+          <span class="ovs-role">美食烹饪 · 家常菜</span>
+          <p>把复杂菜谱拆成可复现的步骤，擅长用固定机位呈现火候变化。</p>
+          <div class="ovs-creator-stats">
+            <div><b>186</b>作品</div><div><b>12.4万</b>关注</div>
+          </div>
+          <button class="ovs-btn-mini" type="button" data-ovs-open="creator" data-ovs-name="周家灶台">查看档案</button>
+        </article>
+        <article class="ovs-creator">
+          <div class="ovs-avatar-lg" style="background:linear-gradient(135deg,#3a7fc4,#174a75)">苏</div>
+          <h3>苏禾整理</h3>
+          <span class="ovs-role">家居收纳 · 空间改造</span>
+          <p>关注普通人家的真实收纳难题，方案强调预算与可持续维护。</p>
+          <div class="ovs-creator-stats">
+            <div><b>92</b>作品</div><div><b>8.7万</b>关注</div>
+          </div>
+          <button class="ovs-btn-mini" type="button" data-ovs-open="creator" data-ovs-name="苏禾整理">查看档案</button>
+        </article>
+        <article class="ovs-creator">
+          <div class="ovs-avatar-lg" style="background:linear-gradient(135deg,#35a37a,#155c43)">叶</div>
+          <h3>叶小满</h3>
+          <span class="ovs-role">日常记录 · 植物与生活</span>
+          <p>长期用延时记录阳台植物，视频里有失败也有意外惊喜。</p>
+          <div class="ovs-creator-stats">
+            <div><b>134</b>作品</div><div><b>10.1万</b>关注</div>
+          </div>
+          <button class="ovs-btn-mini" type="button" data-ovs-open="creator" data-ovs-name="叶小满">查看档案</button>
+        </article>
+        <article class="ovs-creator">
+          <div class="ovs-avatar-lg" style="background:linear-gradient(135deg,#0f7bd6,#0b3f6b)">陈</div>
+          <h3>陈默取景</h3>
+          <span class="ovs-role">城市探索 · 摄影攻略</span>
+          <p>专注城市建筑与街景拍摄机位，提供可复用的取景参数与时段建议。</p>
+          <div class="ovs-creator-stats">
+            <div><b>74</b>作品</div><div><b>6.9万</b>关注</div>
+          </div>
+          <button class="ovs-btn-mini" type="button" data-ovs-open="creator" data-ovs-name="陈默取景">查看档案</button>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- 影像墙 -->
+  <section class="ovs-section" id="ovs-wall">
+    <div class="ovs-wrap">
+      <div class="ovs-section-head">
+        <div>
+          <span class="ovs-kicker">Gallery / 影像墙</span>
+          <h2>用户作品墙：来自社区的真实画面</h2>
+          <p>本月亮相的作品来自 9 位创作者与 3 个在地文化组织，题材横跨城市、自然与手艺。</p>
+        </div>
+        <a class="ovs-link-more" href="#ovs-contact">上传你的作品 →</a>
+      </div>
+      <div class="ovs-wall">
+        <figure class="w-lg">
+          <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 640 360'%3E%3Crect width='640' height='360' fill='%231b2b3d'/%3E%3Cg fill='%23f2c96b' opacity='.9'%3E%3Crect x='60' y='180' width='18' height='70'/%3E%3Crect x='96' y='150' width='18' height='100'/%3E%3Crect x='132' y='196' width='18' height='54'/%3E%3C/g%3E%3Cpath d='M0 286l120-40 130 26 150-60 190 70v78H0z' fill='%232f4a63'/%3E%3Ccircle cx='500' cy='98' r='42' fill='%23dce9f5' opacity='.85'/%3E%3Cg fill='%23dbe9f6' font-family='sans-serif'%3E%3Ctext x='28' y='52' font-size='20' font-weight='bold'%3E夜色中的老码头%3C/text%3E%3Ctext x='28' y='80' font-size='14' opacity='.8'%3E港口记录小组%3C/text%3E%3C/g%3E%3C/svg%3E" alt="夜色中的老码头影像作品，港区灯光与水面" width="640" height="360" loading="lazy">
+          <figcaption>夜色中的老码头 · 港口记录小组</figcaption>
+        </figure>
+        <figure class="w-md">
+          <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 300'%3E%3Crect width='400' height='300' fill='%23f0e6d6'/%3E%3Crect x='40' y='60' width='140' height='180' fill='%23d9c3a4'/%3E%3Ccircle cx='280' cy='130' r='60' fill='%23b98b5e'/%3E%3Crect x='250' y='200' width='110' height='40' fill='%23956a44'/%3E%3Cg fill='%23412f20' font-family='sans-serif'%3E%3Ctext x='20' y='38' font-size='16' font-weight='bold'%3E织布机前的一天%3C/text%3E%3C/g%3E%3C/svg%3E" alt="织布机前的一天影像作品，米色织布与木机" width="400" height="300" loading="lazy">
+          <figcaption>织布机前的一天 · 云间手作</figcaption>
+        </figure>
+        <figure class="w-sm">
+          <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 320 320'%3E%3Crect width='320' height='320' fill='%231e3b32'/%3E%3Ccircle cx='160' cy='150' r='80' fill='%233f7f65' opacity='.6'/%3E%3Cpath d='M0 240l90-60 80 46 150-80v174H0z' fill='%232a5a47'/%3E%3Cg fill='%23dcf3e8' font-family='sans-serif'%3E%3Ctext x='18' y='36' font-size='15' font-weight='bold'%3E苔藓微距%3C/text%3E%3C/g%3E%3C/svg%3E" alt="苔藓微距影像作品，深绿苔藓与光斑" width="320" height="320" loading="lazy">
+          <figcaption>苔藓微距 · 叶小满</figcaption>
+        </figure>
+        <figure class="w-sm">
+          <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 320 320'%3E%3Crect width='320' height='320' fill='%23f5c9cf'/%3E%3Ccircle cx='120' cy='120' r='56' fill='%23e58fa1'/%3E%3Crect x='170' y='170' width='110' height='90' rx='10' fill='%23fff' opacity='.8'/%3E%3Cg fill='%23682d3a' font-family='sans-serif'%3E%3Ctext x='18' y='36' font-size='15' font-weight='bold'%3E春日花市%3C/text%3E%3C/g%3E%3C/svg%3E" alt="春日花市影像作品，粉色花摊与人流" width="320" height="320" loading="lazy">
+          <figcaption>春日花市 · 苏禾整理</figcaption>
+        </figure>
+        <figure class="w-md">
+          <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 300'%3E%3Crect width='400' height='300' fill='%23102a44'/%3E%3Cg stroke='%2338d1ff' stroke-width='3' fill='none'%3E%3Cpath d='M40 250l80-90 60 50 80-100 100 120'/%3E%3C/g%3E%3Ccircle cx='320' cy='82' r='34' fill='%23ffd79a' opacity='.8'/%3E%3Cg fill='%23d6ebfb' font-family='sans-serif'%3E%3Ctext x='20' y='38' font-size='16' font-weight='bold'%3E凌晨四点的山路%3C/text%3E%3C/g%3E%3C/svg%3E" alt="凌晨四点的山路影像作品，蓝色山脊与星光" width="400" height="300" loading="lazy">
+          <figcaption>凌晨四点的山路 · 山海记录员</figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- 榜单 + 评论 + 动态 -->
+  <section class="ovs-section" id="ovs-rank" style="background:#fff;border-top:1px solid var(--ovs-line);border-bottom:1px solid var(--ovs-line)">
+    <div class="ovs-wrap">
+      <div class="ovs-section-head">
+        <div>
+          <span class="ovs-kicker">Ranking / 数据榜单</span>
+          <h2>三张榜单：热度、新人、口碑</h2>
+          <p>榜单综合检索命中、完播表现与用户反馈生成，每周一更新，结果保留历史记录。</p>
+        </div>
+      </div>
+      <div class="ovs-rank">
+        <div class="ovs-rank-col">
+          <h3>热度榜 <span>近七日检索</span></h3>
+          <ol class="ovs-rank-list">
+            <li><span class="ovs-rank-no">1</span>城市清晨长镜<em>26.4k</em></li>
+            <li><span class="ovs-rank-no">2</span>陶器十二道工序<em>18.2k</em></li>
+            <li><span class="ovs-rank-no">3</span>徒步装备复盘<em>15.7k</em></li>
+            <li><span class="ovs-rank-no">4</span>红烧肉火候拆解<em>14.9k</em></li>
+            <li><span class="ovs-rank-no">5</span>转行访谈实录<em>13.4k</em></li>
+          </ol>
+        </div>
+        <div class="ovs-rank-col">
+          <h3>新人榜 <span>入驻 30 天内</span></h3>
+          <ol class="ovs-rank-list">
+            <li><span class="ovs-rank-no">1</span>魏一的旧书摊<em>4,820</em></li>
+            <li><span class="ovs-rank-no">2</span>南岸骑行志<em>4,190</em></li>
+            <li><span class="ovs-rank-no">3</span>小城面馆图鉴<em>3,760</em></li>
+            <li><span class="ovs-rank-no">4</span>窗口自然观察<em>3,205</em></li>
+            <li><span class="ovs-rank-no">5</span>木工阿迟<em>2,988</em></li>
+          </ol>
+        </div>
+        <div class="ovs-rank-col">
+          <h3>口碑榜 <span>用户评分</span></h3>
+          <ol class="ovs-rank-list">
+            <li><span class="ovs-rank-no">1</span>转行访谈实录<em>4.9</em></li>
+            <li><span class="ovs-rank-no">2</span>陶器十二道工序<em>4.8</em></li>
+            <li><span class="ovs-rank-no">3</span>阳台小花园<em>4.8</em></li>
+            <li><span class="ovs-rank-no">4</span>读书笔记视频化<em>4.7</em></li>
+            <li><span class="ovs-rank-no">5</span>配速认知入门<em>4.6</em></li>
+          </ol>
+        </div>
+      </div>
+
+      <div class="ovs-section-head" style="margin-top:44px">
+        <div>
+          <span class="ovs-kicker">Voices / 用户评价</span>
+          <h2>社区里的真实反馈</h2>
+        </div>
+      </div>
+      <div class="ovs-reviews">
+        <div class="ovs-review">
+          <p class="ovs-review-quote">“搜‘红烧肉焯水’直接就定位到对应分钟，这种时间轴标注对新手太友好了，不用来回拖进度条。”</p>
+          <div class="ovs-review-who">
+            <span class="ovs-avatar" style="background:#c98f5e">阿</span>
+            <div><b>阿舟</b><span>注册 8 个月</span></div>
+          </div>
+        </div>
+        <div class="ovs-review">
+          <p class="ovs-review-quote">“作为在地文化组织，我们把老街的记录放在这里，后台能看到真实的检索路径，比单纯看播放量更有参考价值。”</p>
+          <div class="ovs-review-who">
+            <span class="ovs-avatar" style="background:#3a566f">港</span>
+            <div><b>港口记录小组</b><span>机构创作者</span></div>
+          </div>
+        </div>
+        <div class="ovs-review">
+          <p class="ovs-review-quote">“专题页的更新说明写得很清楚，第几集补了什么素材都标出来，长期追更的人会很安心。”</p>
+          <div class="ovs-review-who">
+            <span class="ovs-avatar" style="background:#35a37a">小</span>
+            <div><b>小满的邻居</b><span>注册 2 年</span></div>
+          </div>
+        </div>
+        <div class="ovs-review">
+          <p class="ovs-review-quote">“剪辑建议那块挺实用，尤其是封面信息密度的提醒，帮我改掉了标题堆字的习惯。”</p>
+          <div class="ovs-review-who">
+            <span class="ovs-avatar" style="background:#6b5a99">许</span>
+            <div><b>许知页</b><span>创作者</span></div>
+          </div>
+        </div>
+        <div class="ovs-review">
+          <p class="ovs-review-quote">“希望以后能按拍摄器材筛选，另外移动端的搜索结果页可以再紧凑一点。”</p>
+          <div class="ovs-review-who">
+            <span class="ovs-avatar" style="background:#0f7bd6">陈</span>
+            <div><b>陈默取景</b><span>创作者</span></div>
+          </div>
+        </div>
+        <div class="ovs-review">
+          <p class="ovs-review-quote">“界面干净，没有乱七八糟的弹窗，孩子看手工视频我也放心，这点在现在的平台里不常见。”</p>
+          <div class="ovs-review-who">
+            <span class="ovs-avatar" style="background:#d4663f">林</span>
+            <div><b>林女士</b><span>家长用户</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 企业动态 -->
+  <section class="ovs-section" id="ovs-news">
+    <div class="ovs-wrap">
+      <div class="ovs-section-head">
+        <div>
+          <span class="ovs-kicker">Updates / 企业动态</span>
+          <h2>官方公告与产品更新记录</h2>
+          <p>所有对外发布的信息在此归档，日期与内容均可追溯。</p>
+        </div>
+      </div>
+      <div class="ovs-news">
+        <div class="ovs-news-item">
+          <time datetime="2026-11-18">2026-11-18</time>
+          <h3>「搜索力」冬季主题季开放报名</h3>
+          <p>面向创作者征集以“检索与发现”为题的短片，12 月 20 日截止，入选作品将进入专题企划并获得官方推荐位。</p>
+        </div>
+        <div class="ovs-news-item">
+          <time datetime="2026-11-12">2026-11-12</time>
+          <h3>搜索结果页新增时间轴预览</h3>
+          <p>教程与访谈类内容将默认展示关键节点，用户可在打开前查看章节结构，该项功能已覆盖全部精选池内容。</p>
+        </div>
+        <div class="ovs-news-item">
+          <time datetime="2026-11-05">2026-11-05</time>
+          <h3>版权核验流程升级公告</h3>
+          <p>新上传作品将接入来源声明与授权确认环节，企业合作内容需补充素材授权说明，进一步保障正版内容生态。</p>
+        </div>
+        <div class="ovs-news-item">
+          <time datetime="2026-10-28">2026-10-28</time>
+          <h3>本月新增三位在地文化合作机构</h3>
+          <p>平台与地方影像组织达成内容合作，围绕城市记忆与手艺记录共建专题，相关作品将在影像墙陆续呈现。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ + 合作 + 联系 -->
+  <section class="ovs-section ovs-partners-cream" id="ovs-faq">
+    <div class="ovs-wrap">
+      <div class="ovs-section-head">
+        <div>
+          <span class="ovs-kicker">Support / 帮助中心</span>
+          <h2>常见问题：关于检索、上传与版权</h2>
+        </div>
+        <a class="ovs-link-more" href="#ovs-contact">仍有疑问？联系我们 →</a>
+      </div>
+      <div class="ovs-faq">
+        <details open>
+          <summary>如何提高自己作品的检索命中率？</summary>
+          <p>建议在标题中写清具体场景与动作，例如“手作陶器拉坯”比“记录生活”更容易被检索到；同时在简介里补充器材、地点与时长，编辑在标引时会参考这些信息。封面避免大面积文字堆叠。</p>
+        </details>
+        <details>
+          <summary>上传作品需要满足哪些基本要求？</summary>
+          <p>画面与音轨需完整，分辨率建议不低于 1080P；原创或已获得授权的内容方可提交；涉及第三方音乐、影像素材的，请在提交时注明来源与授权方式，平台会进行核验。</p>
+        </details>
+        <details>
+          <summary>平台对商业合作内容如何处理？</summary>
+          <p>所有商业内容需在提交时勾选合作标识并说明合作方，页面会明确标注来源。未标注的商业内容一经核实将被下架并记录，这也是我们维护用户信任的基础规则。</p>
+        </details>
+        <details>
+          <summary>搜索结果为什么有时会少于预期？</summary>
+          <p>平台坚持先标引再上架，部分内容在核验完成前不会进入结果页。若你确信某条内容应当出现，可通过反馈入口提交通道信息，编辑团队会在两个工作日内复核。</p>
+        </details>
+        <details>
+          <summary>是否支持按地点或人物筛选？</summary>
+          <p>目前支持题材、地点、时长三类筛选，人物与器材维度正在内测，预计在下一版本向全部用户开放。相关进展会在企业动态中同步。</p>
+        </details>
+        <details>
+          <summary>如何申请成为合作机构？</summary>
+          <p>请通过页面底部的联系表单提交机构介绍、内容方向与样片链接，商务团队会在三个工作日内回复。我们优先考虑在地文化、公共教育与原创影像方向的长期合作。</p>
+        </details>
+      </div>
+
+      <div style="margin-top:44px">
+        <div class="ovs-section-head">
+          <div>
+            <span class="ovs-kicker">Partners / 合作品牌</span>
+            <h2>与我们一起构建内容生态的伙伴</h2>
+          </div>
+        </div>
+        <div class="ovs-partner-row">
+          <span class="ovs-partner">云间手作工坊</span>
+          <span class="ovs-partner">城市影像档案馆</span>
+          <span class="ovs-partner">山海户外协会</span>
+          <span class="ovs-partner">明序教育</span>
+          <span class="ovs-partner">港口记录小组</span>
+        </div>
+      </div>
+
+      <div class="ovs-contact" id="ovs-contact">
+        <div class="ovs-contact-card">
+          <h3>联系官方团队</h3>
+          <p>投稿、合作、反馈或媒体沟通，都可以从这里开始。工作日 10:00–19:00 由专人跟进。</p>
+          <div class="ovs-contact-line"><i>✉</i> hello@yingxiangjiansuo.example</div>
+          <div class="ovs-contact-line"><i>☎</i> 400-820-1199（工作日）</div>
+          <div class="ovs-contact-line"><i>⌂</i> 品牌运营中心 · 内容生态事业部</div>
+          <div class="ovs-contact-line"><i>⏱</i> 平均响应时间 6 小时</div>
+          <div style="margin-top:16px;display:flex;gap:10px;flex-wrap:wrap">
+            <button class="ovs-btn ovs-btn-primary" type="button" data-ovs-open="submit" style="background:#38d1ff;color:#062033">提交投稿</button>
+            <button class="ovs-btn ovs-btn-ghost" type="button" data-ovs-open="share" style="background:transparent;color:#d6e9fa;border-color:#2a4b6b">分享官网</button>
+          </div>
+        </div>
+        <form class="ovs-form" id="ovsContactForm">
+          <div>
+            <label for="ovsName">称呼</label>
+            <input id="ovsName" name="name" type="text" placeholder="如何称呼你" required>
+          </div>
+          <div>
+            <label for="ovsType">沟通类型</label>
+            <select id="ovsType" name="type">
+              <option>内容投稿</option>
+              <option>品牌合作</option>
+              <option>问题反馈</option>
+              <option>媒体沟通</option>
+            </select>
+          </div>
+          <div>
+            <label for="ovsMsg">具体说明</label>
+            <textarea id="ovsMsg" name="msg" rows="4" placeholder="请简单描述你的需求或作品方向" required></textarea>
+          </div>
+          <button class="ovs-btn ovs-btn-primary" type="submit">发送信息</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="ovs-footer">
+  <div class="ovs-wrap">
+    <div class="ovs-footer-grid">
+      <div>
+        <div class="ovs-footer-brand">
+          <span class="ovs-brand-mark" aria-hidden="true" style="width:34px;height:34px;border-radius:10px">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+              <circle cx="10.5" cy="10.5" r="6.2" stroke="#38d1ff" stroke-width="2.2"/>
+              <path d="M15.4 15.4L20 20" stroke="#38d1ff" stroke-width="2.4" stroke-linecap="round"/>
+              <path d="M8 8l5 2.5L8 13z" fill="#ff5c7a"/>
+            </svg>
+          </span>
+          <span>影像检索所</span>
+        </div>
+        <p style="margin:0 0 10px;max-width:320px">在线视频搜索网站官方网站，专注原创视频的标引、策展与分发，持续运营，用户至上。</p>
+        <p style="margin:0;color:#6f8ba4">© 2026 影像检索所 · 版权所有</p>
+      </div>
+      <div>
+        <h4>内容</h4>
+        <ul>
+          <li><a href="#ovs-feature">焦点视频</a></li>
+          <li><a href="#ovs-topics">专题企划</a></li>
+          <li><a href="#ovs-wall">影像墙</a></li>
+          <li><a href="#ovs-rank">数据榜单</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>关于</h4>
+        <ul>
+          <li><a href="#ovs-about">品牌故事</a></li>
+          <li><a href="#ovs-creators">创作者矩阵</a></li>
+          <li><a href="#ovs-news">企业动态</a></li>
+          <li><a href="#ovs-faq">帮助中心</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>参与</h4>
+        <ul>
+          <li><a href="#ovs-contact">投稿入口</a></li>
+          <li><a href="#ovs-contact">合作联系</a></li>
+          <li><a href="#ovs-faq">版权说明</a></li>
+          <li><a href="#ovs-top">回到顶部</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="ovs-footer-bottom">
+      <span>官方网站 · 品牌持续运营中 · 内容均为原创或已获授权</span>
+      <span>内容生态事业部 · 品质内容 · 值得信赖</span>
+    </div>
+  </div>
+</footer>
+
+<div class="ovs-toast" id="ovsToast" role="status" aria-live="polite"></div>
+
+<div class="ovs-modal" id="ovsModal" role="dialog" aria-modal="true" aria-labelledby="ovsModalTitle">
+  <div class="ovs-modal-box">
+    <button class="ovs-modal-close" type="button" id="ovsModalClose" aria-label="关闭">✕</button>
+    <h3 id="ovsModalTitle">提示</h3>
+    <p id="ovsModalBody">内容</p>
+    <div class="ovs-share-row" id="ovsShareRow" hidden>
+      <button type="button" data-ovs-copy>复制链接</button>
+      <button type="button" data-ovs-shareto="微信">微信</button>
+      <button type="button" data-ovs-shareto="微博">微博</button>
+      <button type="button" data-ovs-shareto="QQ">QQ</button>
+    </div>
+    <div id="ovsModalExtra" hidden style="margin-top:14px;font-size:13.5px;color:var(--ovs-mute)"></div>
+  </div>
+</div>
+
+<button class="ovs-backtop" id="ovsBackTop" type="button" aria-label="回到顶部">↑</button>
+
+<script>
+(function(){
+  "use strict";
+  var toastEl = document.getElementById('ovsToast');
+  var toastTimer = null;
+  function toast(text){
+    toastEl.textContent = text;
+    toastEl.classList.add('is-on');
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(function(){ toastEl.classList.remove('is-on'); }, 2200);
+  }
+
+  /* 移动端导航 */
+  var burger = document.getElementById('ovsBurger');
+  var nav = document.getElementById('ovsNav');
+  burger.addEventListener('click', function(){
+    var open = nav.classList.toggle('is-open');
+    burger.setAttribute('aria-expanded', open ? 'true' : 'false');
+    burger.textContent = open ? '✕' : '☰';
+  });
+  nav.addEventListener('click', function(e){
+    if(e.target.tagName === 'A'){
+      nav.classList.remove('is-open');
+      burger.setAttribute('aria-expanded','false');
+      burger.textContent = '☰';
+    }
+  });
+
+  /* 搜索前端反馈 */
+  var form = document.getElementById('ovsSearchForm');
+  var input = document.getElementById('ovsSearchInput');
+  var hint = document.getElementById('ovsSearchHint');
+  var pool = [
+    {k:'城市探索', d:'命中 12 条：城市清晨、老码头、街景长镜'},
+    {k:'手作', d:'命中 9 条：陶器工序、织布、木作记录'},
+    {k:'户外', d:'命中 7 条：徒步装备、郊野路线、露营'},
+    {k:'访谈', d:'命中 5 条：转行实录、创作者对话'},
+    {k:'收纳', d:'命中 4 条：桌面改造、衣柜分区'},
+    {k:'美食', d:'命中 11 条：家常菜、面馆图鉴'},
+    {k:'教程', d:'命中 15 条：工序拆解、剪辑思路'}
+  ];
+  function doSearch(){
+    var q = input.value.trim();
+    if(!q){
+      hint.classList.remove('is-on');
+      toast('请输入想检索的题材或场景');
+      return;
+    }
+    var hit = pool.filter(function(item){ return q.indexOf(item.k) > -1 || item.k.indexOf(q) > -1; });
+    var text;
+    if(hit.length){
+      text = '检索「<b>' + q + '</b>」：' + hit.map(function(h){ return h.d; }).join('；') + '。';
+    } else {
+      text = '检索「<b>' + q + '</b>」：暂无精确条目，已为你匹配相近题材（记录、访谈、教程、城市），编辑团队会在下一批标引中补充。';
+    }
+    hint.innerHTML = text + ' 提示：可使用题材词或具体动作组合检索。';
+    hint.classList.add('is-on');
+  }
+  form.addEventListener('submit', function(e){ e.preventDefault(); doSearch(); });
+  input.addEventListener('keydown', function(e){ if(e.key === 'Enter'){ e.preventDefault(); doSearch(); } });
+
+  /* 点赞 / 收藏 */
+  document.addEventListener('click', function(e){
+    var likeBtn = e.target.closest('[data-ovs-like]');
+    if(likeBtn){
+      var numEl = likeBtn.querySelector('[data-ovs-num]');
+      var num = numEl ? parseInt(numEl.textContent.replace(/,/g,''),10) : 0;
+      var liked = likeBtn.classList.toggle('is-liked');
+      var mark = likeBtn.querySelector('span[aria-hidden]');
+      if(numEl){
+        num = liked ? num + 1 : Math.max(0, num - 1);
+        numEl.textContent = num.toLocaleString('en-US');
+      }
+      if(mark) mark.textContent = liked ? '♥' : '♡';
+      toast(liked ? '已点赞，感谢你的支持' : '已取消点赞');
+      return;
+    }
+    var favBtn = e.target.closest('[data-ovs-fav]');
+    if(favBtn){
+      var on = favBtn.classList.toggle('is-faved');
+      var star = favBtn.querySelector('span[aria-hidden]');
+      if(star) star.textContent = on ? '★' : '☆';
+      toast(on ? '已加入检索清单' : '已从检索清单移除');
+      return;
+    }
+    var shareBtn = e.target.closest('[data-ovs-share]');
+    if(shareBtn){
+      openModal('分享这条内容', '把感兴趣的影像分享给朋友，一起发现值得看的内容。', true);
+      return;
+    }
+  });
+
+  /* 弹窗 */
+  var modal = document.getElementById('ovsModal');
+  var modalTitle = document.getElementById('ovsModalTitle');
+  var modalBody = document.getElementById('ovsModalBody');
+  var shareRow = document.getElementById('ovsShareRow');
+  var modalExtra = document.getElementById('ovsModalExtra');
+  var lastFocus = null;
+  function openModal(title, body, showShare, extra){
+    lastFocus = document.activeElement;
+    modalTitle.textContent = title;
+    modalBody.textContent = body;
+    shareRow.hidden = !showShare;
+    modalExtra.hidden = !extra;
+    if(extra) modalExtra.textContent = extra;
+    modal.classList.add('is-on');
+    document.getElementById('ovsModalClose').focus();
+  }
+  function closeModal(){
+    modal.classList.remove('is-on');
+    if(lastFocus && lastFocus.focus) lastFocus.focus();
+  }
+  document.getElementById('ovsModalClose').addEventListener('click', closeModal);
+  modal.addEventListener('click', function(e){ if(e.target === modal) closeModal(); });
+  document.addEventListener('keydown', function(e){ if(e.key === 'Escape' && modal.classList.contains('is-on')) closeModal(); });
+
+  document.querySelectorAll('[data-ovs-open]').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      var type = btn.getAttribute('data-ovs-open');
+      if(type === 'submit'){
+        openModal('投稿入口', '投稿请准备：作品文件或链接、简要内容说明、素材授权说明。提交后编辑团队会在三个工作日内完成初审，并在后台同步进度。', false, '本批次征集主题：「搜索力」——以检索、发现、寻找为线索的原创短片。');
+      } else if(type === 'share'){
+        openModal('分享官网', '把影像检索所分享给需要找参考影像的朋友。', true);
+      } else if(type === 'creator'){
+        var name = btn.getAttribute('data-ovs-name') || '创作者';
+        openModal(name, '该创作者长期在本平台发布原创内容，作品经过画质与来源核验。档案页包含擅长方向、更新频率与代表作品清单，可通过投稿入口发起合作沟通。', false, '数据说明：作品数与关注数为平台内核验数据，实时变动。');
+      }
+    });
+  });
+
+  /* 复制链接 */
+  document.addEventListener('click', function(e){
+    if(e.target.closest('[data-ovs-copy]')){
+      var link = location.href;
+      if(navigator.clipboard && navigator.clipboard.writeText){
+        navigator.clipboard.writeText(link).then(function(){
+          toast('链接已复制，可粘贴分享');
+        }).catch(function(){ toast('复制失败，请手动复制地址栏链接'); });
+      } else {
+        toast('当前浏览器不支持自动复制，请手动复制地址栏链接');
+      }
+    }
+    var to = e.target.closest('[data-ovs-shareto]');
+    if(to){
+      toast('已生成分享提示：' + to.getAttribute('data-ovs-shareto') + '（演示环境）');
+    }
+  });
+
+  /* 联系表单 */
+  var contactForm = document.getElementById('ovsContactForm');
+  contactForm.addEventListener('submit', function(e){
+    e.preventDefault();
+    var name = document.getElementById('ovsName').value.trim();
+    var msg = document.getElementById('ovsMsg').value.trim();
+    if(!name || !msg){
+      toast('请填写称呼与具体说明');
+      return;
+    }
+    toast('信息已提交，官方团队会尽快联系你');
+    contactForm.reset();
+  });
+
+  /* 回到顶部 */
+  var backTop = document.getElementById('ovsBackTop');
+  window.addEventListener('scroll', function(){
+    if(window.scrollY > 640){ backTop.classList.add('is-on'); }
+    else { backTop.classList.remove('is-on'); }
+  }, {passive:true});
+  backTop.addEventListener('click', function(){
+    window.scrollTo({top:0, behavior:'smooth'});
+  });
+
+  /* 数字滚动 */
+  var counted = false;
+  function runCount(){
+    if(counted) return;
+    var items = document.querySelectorAll('[data-ovs-count]');
+    if(!items.length) return;
+    var done = 0;
+    items.forEach(function(el){
+      var target = parseInt(el.getAttribute('data-ovs-count'),10) || 0;
+      var start = null;
+      function step(ts){
+        if(!start) start = ts;
+        var p = Math.min((ts - start) / 900, 1);
+        var val = Math.floor(target * p);
+        el.textContent = val.toLocaleString('en-US') + (target >= 100 ? '+' : '');
+        if(p < 1){ requestAnimationFrame(step); }
+        else { el.textContent = target.toLocaleString('en-US') + (target >= 100 ? '+' : ''); }
+      }
+      requestAnimationFrame(step);
+      done++;
+    });
+    if(done) counted = true;
+  }
+  if('IntersectionObserver' in window){
+    var obs = new IntersectionObserver(function(entries){
+      entries.forEach(function(en){
+        if(en.isIntersecting){ runCount(); obs.disconnect(); }
+      });
+    }, {threshold:.4});
+    var statBox = document.querySelector('.ovs-stats');
+    if(statBox) obs.observe(statBox);
+  }
+
+  /* 导航高亮 */
+  var navLinks = Array.prototype.slice.call(document.querySelectorAll('.ovs-nav a'));
+  var sections = navLinks.map(function(a){
+    var id = a.getAttribute('href');
+    return id && id.length > 1 ? document.querySelector(id) : null;
+  });
+  window.addEventListener('scroll', function(){
+    var pos = window.scrollY + 180;
+    var activeIdx = 0;
+    sections.forEach(function(sec, i){
+      if(sec && sec.offsetTop <= pos) activeIdx = i;
+    });
+    navLinks.forEach(function(a, i){ a.classList.toggle('is-active', i === activeIdx); });
+  }, {passive:true});
+})();
+</script>
+</body>
+              </html>
